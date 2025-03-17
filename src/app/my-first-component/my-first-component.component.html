@@ -1,0 +1,28 @@
+<div class="form-container">
+    <h2>Simple Form</h2>
+    <form #myForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" [(ngModel)]="name" name="name" required> <!-- ngModel para 2 way biding-->
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" [(ngModel)]="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" rows="5" name="message" [(ngModel)]="message"  required></textarea>
+        </div>
+        <button type="submit" [disabled]="!myForm.valid">Submit</button>
+    </form>
+ 
+    <!-- <div *ngIf="isSubmitted">
+        <h3>Form Data:</h3>
+        <p><strong>Name: {{name}} </strong></p>
+        <p><strong>Email: {{email }}</strong></p>
+        <p><strong>Message: {{message}} </strong></p>
+    </div> -->
+    <div class="flex-container" *ngIf="isSubmitted">
+        <app-message-details *ngFor="let msg of messages;let i = index" [message]="msg" [index]="i" (delete)="deleteMessage($event)"> </app-message-details>
+    </div>
+</div>
